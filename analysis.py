@@ -11,7 +11,8 @@ database="expense_tracker"
 cursor=conn.cursor()
 cursor.execute("SELECT * FROM expenses")
 data=cursor.fetchall()
-df=pd.DataFrame(data,columns=["id","amount","category","date","description"])
+cursor.close()
+df=pd.DataFrame(data,columns=["id","amount","category","date","payment_method","description"])
 print(df)
 
 no_of_expns=len(df)
@@ -47,3 +48,4 @@ monthly_spending=df.groupby(df["date"].dt.to_period("M"))["amount"].sum()
 print("Monthly Spending:\n",monthly_spending)
 
 print("Basic Statistics:\n",df["amount"].describe())
+conn.close()

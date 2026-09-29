@@ -13,6 +13,7 @@ database="expense_tracker"
 cursor=conn.cursor()
 cursor.execute("SELECT * FROM expenses")
 data=cursor.fetchall()
+cursor.close()
 df=pd.DataFrame(data,columns=["id","amount","category","date","payment_method","description"])
 
 #Spending Over Time
@@ -42,3 +43,4 @@ plt.xlabel("Month")
 plt.ylabel("Total Amount")
 plt.xticks(rotation=45)
 plt.show()
+conn.close()
